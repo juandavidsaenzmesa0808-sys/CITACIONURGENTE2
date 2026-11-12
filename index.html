@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070203">
+<title>MALUMA × NANIELITA · World Tour 2027</title>
+<script>document.documentElement.classList.add('js')</script><!-- sin JS, todo se ve igual -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@1,500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ===== PALETA Y BASE ===== */
+:root{--red:#b3001b;--deep:#4a000d;--blk:#070203;--gold:#ffd24a;--gold2:#c9930a;
+  --bn:'Bebas Neue',Impact,'Arial Narrow',sans-serif;--pf:'Playfair Display',Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--blk);color:#fff;font:400 1rem/1.6 Poppins,system-ui,sans-serif;overflow-x:hidden}
+/* Texturas globales: papel arrugado (multiply) + grano (overlay) */
+body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60}
+body::before{mix-blend-mode:multiply;opacity:.5;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .018' numOctaves='5' seed='7'/%3E%3CfeDiffuseLighting lighting-color='%23fff' surfaceScale='4'%3E%3CfeDistantLight azimuth='50' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+body::after{mix-blend-mode:overlay;opacity:.2;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#fx{position:fixed;inset:0;z-index:40;pointer-events:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* Texto dorado metálico animado */
+.gold{background:linear-gradient(100deg,#b8860b,var(--gold),#fff6c8,var(--gold),#b8860b);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:-250% 0}}
+
+/* Botón principal brillante */
+.cta{position:relative;overflow:hidden;display:inline-block;padding:1.1rem 2.6rem;border:0;border-radius:999px;cursor:pointer;text-decoration:none;font:400 clamp(1.4rem,5vw,2rem)/1 var(--bn);letter-spacing:.15em;color:#2b0006;background:linear-gradient(180deg,#fff2b0,var(--gold) 45%,var(--gold2));box-shadow:0 0 0 3px #7a0010,0 0 40px #ffd24acc,0 10px 30px #000a;animation:pulse 2s infinite;transition:transform .25s}
+.cta:hover{transform:scale(1.08) rotate(-1deg)}
+.cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#fffa,transparent);transform:skewX(-20deg);animation:glint 3s infinite}
+@keyframes glint{to{left:130%}}
+@keyframes pulse{50%{box-shadow:0 0 0 3px #7a0010,0 0 70px #ffd24a,0 0 0 14px #ffd24a22,0 10px 30px #000a}}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;text-align:center;padding:5rem 1rem 6rem;background:radial-gradient(ellipse at 50% 30%,#8b0017,var(--blk) 75%)}
+.collage{position:absolute;inset:-15% -5%;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr);gap:4px;transform:translateY(calc(var(--sy,0)*.2px))}
+@media(min-width:800px){.collage{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}}
+.t,.g{position:relative;overflow:hidden;background:linear-gradient(135deg,#3a0008,#9b0f22)}
+.t{transition:opacity .8s}
+.t i,.g i{position:absolute;inset:0;background:center/cover no-repeat;transition:transform .8s}
+.t i{animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.18)}}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,#07020399,#5c001099 45%,#070203f2),radial-gradient(circle at 50% 40%,transparent 20%,#000a 90%)}
+/* Luces de escenario */
+.beams{position:absolute;inset:0;overflow:hidden;mix-blend-mode:screen;pointer-events:none}
+.beams b{position:absolute;bottom:-10%;left:calc(var(--x)*1%);margin-left:-9vmax;width:18vmax;height:130%;transform-origin:50% 100%;background:linear-gradient(to top,#ffe08acc,#ff2a4a44 45%,transparent 85%);clip-path:polygon(46% 100%,54% 100%,100% 0,0 0);animation:sw 7s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes sw{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+.hc{position:relative;z-index:3;width:100%;transform:translateY(calc(var(--sy,0)*-.12px))}
+.kick{font:400 clamp(1rem,3.6vw,1.6rem)/1 var(--bn);letter-spacing:.35em;color:var(--gold);margin-bottom:1rem}
+h1{filter:drop-shadow(0 5px 0 #6b0012) drop-shadow(0 0 30px #ff2a4a88)}
+h1 .n{display:block;font:400 clamp(3.6rem,22vw,16rem)/.82 var(--bn);letter-spacing:.01em}
+h1 .x{display:block;font:400 clamp(2rem,9vw,5rem)/1 var(--bn);letter-spacing:.2em;margin:.1em 0;color:#fff;text-shadow:0 0 25px var(--red)}
+.sub{margin-top:1.2rem;font-size:clamp(.9rem,3.4vw,1.2rem);letter-spacing:.12em;text-transform:uppercase}
+.cd{display:flex;gap:clamp(.4rem,2vw,1rem);justify-content:center;margin:1.6rem 0 2rem}
+.cd div{min-width:clamp(62px,18vw,110px);padding:.7rem .2rem;border:1px solid #ffd24a88;background:#07020399;backdrop-filter:blur(6px);border-radius:10px;box-shadow:0 0 25px #b3001b88}
+.cd b{display:block;font:400 clamp(2rem,9vw,3.6rem)/1 var(--bn);color:var(--gold)}
+.cd span{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase}
+.flip{animation:flip .55s}
+@keyframes flip{from{transform:rotateX(90deg);opacity:0}}
+.down{position:absolute;bottom:1.4rem;left:50%;z-index:3;color:var(--gold);text-decoration:none;font:400 1.1rem var(--bn);letter-spacing:.3em;animation:bob 1.6s infinite}
+@keyframes bob{50%{transform:translate(-50%,8px)}}
+
+/* Cinta en movimiento */
+.tick{position:relative;z-index:4;overflow:hidden;background:var(--red);border-block:3px solid var(--gold);padding:.6rem 0;margin:-1.4rem 0 1rem;transform:rotate(-1.5deg) scale(1.05)}
+.tick div{display:flex;width:max-content;animation:mq 24s linear infinite}
+.tick span{white-space:nowrap;padding-right:2rem;font:400 clamp(1.4rem,5vw,2.2rem)/1 var(--bn);letter-spacing:.12em}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ===== SECCIONES ===== */
+.sec{position:relative;max-width:1200px;margin:auto;padding:5rem 1.2rem}
+.h2{font:400 clamp(2.6rem,10vw,6rem)/.9 var(--bn);letter-spacing:.04em;text-align:center;margin-bottom:2.5rem;text-shadow:4px 4px 0 var(--red)}
+.js .rv{opacity:0;transform:translateY(50px) scale(.97);transition:1s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* Galería */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;grid-auto-flow:dense;gap:6px}
+@media(min-width:800px){.gal{grid-template-columns:repeat(4,1fr);grid-auto-rows:170px}}
+.g{cursor:zoom-in;border:2px solid #ffffff22;transition:border-color .4s,box-shadow .4s}
+.g:nth-child(1),.g:nth-child(7){grid-column:span 2;grid-row:span 2}
+.g:hover{border-color:var(--gold);box-shadow:0 0 30px #ff2a4a;z-index:2}
+.g:hover i{transform:scale(1.2) rotate(1deg)}
+#lb{position:fixed;inset:0;z-index:90;background:#000d center/contain no-repeat;opacity:0;visibility:hidden;transition:.4s;cursor:zoom-out}
+#lb.on{opacity:1;visibility:visible}
+
+/* Boleta */
+#boleta{background:var(--deep);max-width:none}
+.tk{position:relative;max-width:780px;margin:0 auto 2.5rem;display:grid;grid-template-columns:1fr 130px;color:#2b0006;background:linear-gradient(135deg,#fff7dc,#ffe9a8 60%,#f3c75a);border-radius:18px;box-shadow:0 30px 60px #000a,0 0 60px #ff2a4a66;transition:transform .5s}
+.tk:hover{transform:perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.02)}
+.tk::before,.tk::after,.stub::before,.stub::after{content:"";position:absolute;width:28px;height:28px;border-radius:50%;background:var(--deep)}
+.tk::before{left:-14px;top:50%;margin-top:-14px}.tk::after{right:-14px;top:50%;margin-top:-14px}
+.stub::before{left:-14px;top:-14px}.stub::after{left:-14px;bottom:-14px}
+.tm{padding:1.6rem 1.4rem 1.6rem 1.8rem}
+.tm small{letter-spacing:.3em;font-weight:600;color:var(--red)}
+.tm h3{font:400 clamp(2.2rem,8vw,3.8rem)/.95 var(--bn);margin:.3rem 0 .8rem;color:#7a0010}
+.tm p{font-size:.95rem;margin:.2rem 0}.tm b{display:inline-block;min-width:4.6rem;color:var(--red)}
+.stub{position:relative;display:grid;place-content:center;justify-items:center;gap:.5rem;padding:1rem .6rem;border-left:3px dashed #7a001a;font:400 .9rem var(--bn);letter-spacing:.15em;text-align:center}
+.bar{width:70px;height:110px;background:repeating-linear-gradient(90deg,#2b0006 0 2px,transparent 2px 4px,#2b0006 4px 5px,transparent 5px 8px,#2b0006 8px 11px,transparent 11px 12px)}
+@media(max-width:520px){.tk{grid-template-columns:1fr 92px}.bar{width:54px}.tm{padding:1.4rem 1rem 1.4rem 1.3rem}}
+.ctr{text-align:center}
+
+/* Mensaje */
+.msg{max-width:900px;text-align:center}
+.msg p{font:italic 500 clamp(1.7rem,6vw,3.4rem)/1.3 var(--pf)}
+.msg p::before{content:"“";display:block;font-size:2.6em;line-height:.6;color:var(--gold)}
+.msg span{display:block;margin-top:1.6rem;font:400 1.6rem var(--bn);letter-spacing:.4em;color:var(--gold)}
+
+.cap{margin-top:.8rem;font:400 1.2rem var(--bn);letter-spacing:.2em;color:var(--gold)}
+
+/* Dedicatoria */
+.dedic p::before{content:"♥"}
+.dedic span{font-size:clamp(1.8rem,7vw,3rem);letter-spacing:.2em;text-shadow:3px 3px 0 var(--red)}
+
+/* Ubicación en la boleta */
+.tm .lt{margin-top:.7rem}
+.loc{display:grid;grid-template-columns:repeat(4,1fr);gap:.1rem .5rem;margin-top:.4rem;padding-top:.5rem;border-top:2px dashed #7a001a66;max-width:340px}
+.loc small{font-size:.6rem;letter-spacing:.12em;font-weight:600;color:var(--red)}
+.loc strong{font:400 1.9rem/1 var(--bn);color:#7a0010}
+/* Puerta de entrada */
+#gate{display:none}
+.js #gate{position:fixed;inset:0;z-index:59;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;padding:1rem;text-align:center;background:radial-gradient(ellipse at 50% 40%,#8b0017,#000 75%);transition:opacity .9s,visibility .9s}
+.js #gate.out{opacity:0;visibility:hidden}
+.js #gate:not(.out)~#mus{display:none}
+.gt{font:400 clamp(3rem,16vw,9rem)/.9 var(--bn);filter:drop-shadow(0 5px 0 #6b0012) drop-shadow(0 0 30px #ff2a4a88)}
+#gate small{font-size:.85rem;opacity:.85}
+
+/* Footer gigante */
+.fin{position:relative;overflow:hidden;text-align:center;padding:6rem 1rem 9rem;background:linear-gradient(180deg,var(--blk),#7a0012 55%,var(--red))}
+.fin h2{position:relative;z-index:2;filter:drop-shadow(0 6px 0 #4a000d);margin-bottom:2.5rem}
+.fin h2 span{display:block;font:400 clamp(3.2rem,21vw,17rem)/.85 var(--bn)}
+.fin p{position:relative;z-index:2;margin-top:2.5rem;font-size:.85rem;opacity:.8}
+.fw{position:absolute;width:6px;height:6px;border-radius:50%;opacity:0;animation:fw 3s infinite;box-shadow:0 -50px var(--gold),35px -35px #fff,50px 0 #ff2a4a,35px 35px var(--gold),0 50px #fff,-35px 35px #ff2a4a,-50px 0 var(--gold),-35px -35px #fff}
+@keyframes fw{0%{transform:scale(0);opacity:1}70%{opacity:1}100%{transform:scale(2.4);opacity:0}}
+
+/* Reproductor flotante */
+#mus{position:fixed;right:1rem;bottom:1rem;z-index:80;width:62px;height:62px;border-radius:50%;border:2px solid var(--gold);background:radial-gradient(circle,var(--red),#4a000d);color:#fff;font-size:1.4rem;cursor:pointer;display:grid;place-items:center;box-shadow:0 0 25px #ff2a4acc;transition:transform .3s}
+#mus:hover{transform:scale(1.1)}
+.eq{display:none;gap:3px;align-items:flex-end;height:22px}.eq i{width:4px;background:var(--gold);animation:eq .8s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{from{height:4px}to{height:22px}}
+#mus.on .eq{display:flex}#mus.on .ic{display:none}
+#hint{position:fixed;left:50%;bottom:1.4rem;z-index:80;transform:translateX(-50%);max-width:calc(100vw - 6rem);padding:.5rem 1rem;border-radius:99px;background:var(--gold);color:#2b0006;font:600 .75rem Poppins,sans-serif;text-align:center;animation:hb 1.8s infinite;transition:opacity .5s}
+@keyframes hb{50%{transform:translate(-50%,-6px)}}
+#hint.off{opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<!-- Puerta de entrada: el toque permite que la música suene en todos los celulares -->
+<div id="gate" role="dialog" aria-label="Entrar a la invitación">
+  <p class="kick">WORLD TOUR 2027</p>
+  <div class="gt gold">MALUMA<br>×<br>NANIELITA</div>
+  <button class="cta" id="enter">TOCA PARA ENTRAR</button>
+  <small>🎶 Esta invitación tiene música · sube el volumen</small>
+</div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<!-- HERO: collage dinámico + luces + cuenta regresiva -->
+<header class="hero" id="top">
+  <div class="collage" aria-hidden="true"><div class="t"><i></i></div><div class="t"><i></i></div><div class="t"><i></i></div><div class="t"><i></i></div><div class="t"><i></i></div><div class="t"><i></i></div></div>
+  <div class="shade"></div>
+  <div class="beams" aria-hidden="true"><b style="--x:5;--d:-1s"></b><b style="--x:28;--d:-4s"></b><b style="--x:50;--d:-2s"></b><b style="--x:72;--d:-5s"></b><b style="--x:95;--d:-3s"></b></div>
+  <div class="hc">
+    <p class="kick">WORLD TOUR 2027 · BOGOTÁ</p>
+    <h1><span class="n gold">MALUMA</span><span class="x">×</span><span class="n gold">NANIELITA</span></h1>
+    <p class="sub">Estás invitada a una noche inolvidable · 9 de febrero de 2027</p>
+    <div class="cd" id="cd" role="timer" aria-label="Cuenta regresiva al concierto"></div>
+    <a class="cta" id="ver" href="#boleta">VER MI BOLETA</a>
+  </div>
+  <a class="down" href="#galeria" aria-label="Ir a la galería">DESLIZA ↓</a>
+</header>
+
+<div class="tick" aria-hidden="true"><div id="tk"></div></div>
+
+<!-- GALERÍA -->
+<section class="sec rv" id="galeria">
+  <h2 class="h2">MALUMA UNIVERSE</h2>
+  <div class="gal" id="gal"></div>
+</section>
+<div id="lb" role="dialog" aria-label="Foto ampliada"></div>
+
+<!-- BOLETA -->
+<section class="sec rv" id="boleta">
+  <h2 class="h2">TU BOLETA</h2>
+  <article class="tk">
+    <div class="tm">
+      <small>ADMIT ONE · VIP</small>
+      <h3>MALUMA<br>WORLD TOUR 2027</h3>
+      <p><b>Fecha:</b> 9 de Febrero de 2027</p>
+      <p><b>Lugar:</b> El Corazón de Bogotá - Arena</p>
+      <p><b>Invitada:</b> Nanielita Hermosa</p>
+      <p class="lt"><b>Ubicación:</b> 2 asientos</p>
+      <div class="loc" role="table" aria-label="Piso 2, Bloque 213, Fila H, Asientos 3 y 4">
+        <small>PISO</small><small>BLOQUE</small><small>FILA</small><small>ASIENTO</small>
+        <strong>2</strong><strong>213</strong><strong>H</strong><strong>3</strong>
+        <strong>2</strong><strong>213</strong><strong>H</strong><strong>4</strong>
+      </div>
+    </div>
+    <div class="stub"><div class="bar" aria-hidden="true"></div>Nº 0209-27</div>
+  </article>
+  <div class="ctr"><a class="cta" href="https://www.tuboleta.com" target="_blank" rel="noopener">ABRIR BOLETA DIGITAL</a></div>
+</section>
+
+<!-- MENSAJE -->
+<section class="sec msg rv">
+  <p>Nanielita Hermosa, esta noche es tuya. Que la música de Maluma sea el soundtrack de un cumpleaños tan único como tú.</p>
+  <span>♥</span>
+  <div class="cap">♪ Ahora suena: Maluma · Cuatro Babys</div>
+</section>
+
+<!-- DEDICATORIA -->
+<section class="sec msg dedic rv">
+  <p>Haría lo que fuera por verte feliz. Espero que lo disfrutes.</p>
+  <span>TE AMO CHINITA LOCA ♥</span>
+</section>
+
+<!-- FOOTER GIGANTE -->
+<footer class="fin" id="final">
+  <i class="fw" style="left:12%;top:12%"></i><i class="fw" style="left:85%;top:22%;animation-delay:1s"></i><i class="fw" style="left:50%;top:6%;animation-delay:2s"></i><i class="fw" style="left:20%;top:70%;animation-delay:1.5s"></i><i class="fw" style="left:80%;top:75%;animation-delay:.5s"></i>
+  <h2 aria-label="¡Feliz cumpleaños Nanielita Hermosa!"><span class="gold">¡FELIZ</span><span class="gold">CUMPLEAÑOS</span><span class="gold">NANIELITA</span><span class="gold">HERMOSA!</span></h2>
+  <button class="cta" id="conf">🎊 LANZAR CONFETI</button>
+  <p>Hecho con ♥ para Nanielita Hermosa</p>
+</footer>
+
+<!-- Música: botón flotante -->
+<button id="mus" aria-label="Reproducir o pausar música"><span class="ic">▶</span><span class="eq"><i></i><i></i><i></i></span></button>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+/* ===== CONFIGURACIÓN: cambia aquí imágenes, música y fecha ===== */
+const EVENT_DATE = "2027-02-09T20:00:00";
+const MUSIC_URL = "musica.mp3"; // archivo de audio que va en la misma carpeta que index.html
+const P = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=75`;
+const U = id => `https://unsplash.com/photos/${id}/download?w=1400`;
+const IMGS = [ // fotos de concierto (Unsplash). Pega aquí URLs de fotos de Maluma si tienes derecho a usarlas.
+  P("1470229722913-7c0e2dbbafd3"), P("1459749411175-04bf5292ceea"), P("1501386761578-eac5c94b800a"),
+  P("1493225457124-a3eb161ffa5f"), P("1429962714451-bb934ecdc4ec"), P("1540039155733-5bb30b53aa14"),
+  P("1514525253161-7a46d19cd819"), U("wahZ_EpEOmw"), U("gKgL1WlE5KM"), U("V1O0gBfbrO8"),
+  U("xdC1UrzmYiA"), U("d8clU5pcFJQ")
+];
+/* =============================================================== */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const root = document.documentElement, pad = n => String(n).padStart(2, "0");
+const boom = (o = {}) => window.confetti && confetti({ particleCount: 130, spread: 90, origin: { y: .7 }, colors: ["#ffd24a", "#b3001b", "#ff2a4a", "#fff"], ...o });
+
+/* Contador regresivo */
+const target = new Date(EVENT_DATE).getTime();
+$("#cd").innerHTML = ["Días", "Horas", "Min", "Seg"].map(l => `<div><b>00</b><span>${l}</span></div>`).join("");
+const cb = $$("#cd b");
+function tick() {
+  const t = Math.max(0, target - Date.now()) / 1000;
+  [Math.floor(t / 86400), Math.floor(t % 86400 / 3600), Math.floor(t % 3600 / 60), Math.floor(t % 60)].forEach((v, i) => {
+    const s = pad(v);
+    if (cb[i].textContent !== s) { cb[i].textContent = s; cb[i].classList.remove("flip"); void cb[i].offsetWidth; cb[i].classList.add("flip"); }
+  });
+}
+tick(); setInterval(tick, 1000);
+
+/* Imágenes automáticas: se prueban todas y solo se usan las que cargan */
+$("#gal").innerHTML = '<div class="g"><i></i></div>'.repeat(10);
+const slots = $$(".t i, .g i"), ok = [];
+const paint = () => slots.forEach((el, i) => { if (ok.length) { const u = ok[i % ok.length]; if (el.dataset.u !== u) { el.dataset.u = u; el.style.backgroundImage = `url("${u}")`; } } });
+IMGS.forEach(u => { const im = new Image(); im.onload = () => { ok.push(u); paint(); }; im.src = u; });
+setInterval(() => { // el collage del hero cambia solo
+  if (ok.length < 2) return;
+  const t = $$(".t")[Math.floor(Math.random() * 6)], i = t.firstChild;
+  t.style.opacity = 0;
+  setTimeout(() => { const u = ok[Math.floor(Math.random() * ok.length)]; i.dataset.u = u; i.style.backgroundImage = `url("${u}")`; t.style.opacity = 1; }, 800);
+}, 2800);
+const lb = $("#lb");
+$$(".g").forEach(g => g.onclick = () => { const u = g.firstChild.dataset.u; if (u) { lb.style.backgroundImage = `url("${u}")`; lb.classList.add("on"); } });
+lb.onclick = () => lb.classList.remove("on");
+
+/* Música: intenta sonar sola al abrir; si el navegador lo bloquea, suena al tocar ENTRAR */
+const au = new Audio(MUSIC_URL); au.loop = true; au.volume = .7;
+const gate = $("#gate"), closeGate = () => gate.classList.add("out");
+au.onplay = () => $("#mus").classList.add("on");
+au.onpause = () => $("#mus").classList.remove("on");
+au.play().then(closeGate).catch(() => {});                                         // 1) autoplay directo
+$("#enter").onclick = () => { au.play().catch(() => {}); closeGate(); boom({ particleCount: 160 }); }; // 2) con el toque
+$("#mus").onclick = () => au.paused ? au.play().catch(() => {}) : au.pause();
+
+/* Botón VER MI BOLETA: confeti + scroll suave */
+$("#ver").onclick = e => { e.preventDefault(); boom({ particleCount: 200 }); $("#boleta").scrollIntoView({ behavior: "smooth" }); };
+$("#conf").onclick = () => { boom({ particleCount: 260 }); boom({ angle: 60, origin: { x: 0, y: .8 } }); boom({ angle: 120, origin: { x: 1, y: .8 } }); };
+let loop;
+new IntersectionObserver(([e]) => {
+  clearInterval(loop);
+  if (e.isIntersecting) { boom({ particleCount: 180 }); loop = setInterval(() => boom({ particleCount: 40, spread: 80, origin: { x: Math.random(), y: Math.random() * .4 } }), 1400); }
+}, { threshold: .35 }).observe($("#final"));
+
+/* Cinta, aparición al scroll, parallax */
+$("#tk").innerHTML = "<span>MALUMA WORLD TOUR 2027 ✦ 9 DE FEBRERO ✦ BOGOTÁ ✦ NANIELITA HERMOSA ✦</span>".repeat(8);
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add("in")), { threshold: .1 });
+$$(".rv").forEach(el => io.observe(el));
+addEventListener("scroll", () => root.style.setProperty("--sy", scrollY), { passive: true });
+
+/* Partículas: brasas doradas y rojas */
+const cv = $("#fx"), cx = cv.getContext("2d"); let W, H;
+const rs = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; }; rs(); addEventListener("resize", rs);
+const ps = Array.from({ length: 70 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 2.2 + .6, v: Math.random() * .6 + .2, d: Math.random() * 6, c: Math.random() > .6 ? "#ff2a4a" : "#ffd24a" }));
+(function frame(t = 0) {
+  cx.clearRect(0, 0, W, H);
+  ps.forEach(p => {
+    p.y -= p.v; p.x += Math.sin(t / 900 + p.d) * .3;
+    if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+    cx.globalAlpha = .75; cx.fillStyle = p.c; cx.shadowBlur = 10; cx.shadowColor = p.c;
+    cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 7); cx.fill();
+  });
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
